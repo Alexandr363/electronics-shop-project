@@ -2,14 +2,14 @@
 from src.item import Item
 
 
-item1 = Item('tel', 10, 5)
+phone = Item('tel', 10, 5)
 Item.pay_rate = 5
 
 
 def test_calculate_total_price():
-    assert item1.calculate_total_price() == 50
+    assert phone.calculate_total_price() == 50
 
 
 def test_apply_discount():
-    item1.apply_discount()
-    assert item1.price == 50
+    phone.apply_discount()
+    assert phone.price == 50
