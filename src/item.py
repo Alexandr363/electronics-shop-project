@@ -18,6 +18,13 @@ class Item:
 
         self.all.append(self)
 
+    def __repr__(self):
+        return f"{self.__class__.__name__}('{self.__name}', {self.price}, " \
+               f"{self.quantity})"
+
+    def __str__(self):
+        return self.__name
+
     @classmethod
     def instantiate_from_csv(cls, filename) -> None:
         """
@@ -25,7 +32,7 @@ class Item:
         из открытого файла
         """
         Item.all = []
-        with open('../src/items.csv', newline='',
+        with open(filename, newline='',
                   encoding='windows-1251') as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:

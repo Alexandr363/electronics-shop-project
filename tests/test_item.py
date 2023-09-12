@@ -32,3 +32,13 @@ def test_instantiate_from_csv():
     Item.instantiate_from_csv('/Users/mac/Dev/electronics-shop-project'
                               '/src/items.csv')
     assert len(Item.all) == 5
+
+
+def test_repr():
+    phone = Item('Телефон', 5, 2)
+    assert repr(phone) == "Item('Телефон', 5, 2)"
+
+
+def test_str():
+    phone = Item('Телефон', 5, 2)
+    assert str(phone) == 'Телефон'
