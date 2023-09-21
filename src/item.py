@@ -25,6 +25,12 @@ class Item:
     def __str__(self):
         return self.__name
 
+    def __add__(self, other):
+        if not isinstance(other, Item):
+            raise ValueError('Складывать можно только объекты Employee и '
+                             'дочерние от них.')
+        return self.quantity + other.quantity
+
     @classmethod
     def instantiate_from_csv(cls, filename) -> None:
         """
