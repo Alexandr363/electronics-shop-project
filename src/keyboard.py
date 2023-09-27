@@ -5,29 +5,24 @@ class MixinKeyboard:
     """
     Миксин, добавляет функцию смены языка классу Keyboard
     """
-    LANGUAGE = 'EN'
-
-    def __init__(self):
-        self.__language = 'EN'
-        MixinKeyboard.__language = self.__language
+    _LANGUAGE = 'EN'
 
     def change_lang(self):
         """
-        Функция меняет язык
+        Меняет язык
         """
-        if self.__language == 'EN':
-            self.__language = 'RU'
-        elif self.__language == 'RU':
-            self.__language = 'EN'
+        if self._LANGUAGE == 'EN':
+            self._LANGUAGE = 'RU'
+        elif self._LANGUAGE == 'RU':
+            self._LANGUAGE = 'EN'
 
     @property
     def language(self):
-        return self.__language
+        return self._LANGUAGE
 
 
 class Keyboard(Item, MixinKeyboard):
     """
     Класс для клавиатуры в магазине
     """
-    def __init__(self, name: str, price: float, quantity: int) -> None:
-        super().__init__(name, price, quantity)
+    pass
