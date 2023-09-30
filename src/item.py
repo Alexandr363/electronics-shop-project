@@ -1,6 +1,17 @@
 import csv
 
 
+class InstantiateCSVError(Exception):
+    """
+    Класс исключения: если нет столбца
+    """
+    def __init__(self):
+        self.message = "_Файл item.csv поврежден_"
+
+    def __str__(self):
+        return self.message
+
+
 class Item:
     """
     Класс для представления товара в магазине
@@ -33,20 +44,29 @@ class Item:
         return self.quantity + other.quantity
 
     @classmethod
-    def instantiate_from_csv(cls, filename) -> None:
+    def instantiate_from_csv(cls, filename='../src/items.csv') -> None:
         """
         Открывает файл csv, создаёт экземпляры классы Item на основании данных
         из открытого файла
         """
         Item.all = []
-        with open(filename, newline='',
-                  encoding='windows-1251') as csvfile:
-            reader = csv.DictReader(csvfile)
-            for row in reader:
-                name = str(row['name'])
-                price = float(row['price'])
-                quantity = int(row['quantity'])
-                cls(name, price, quantity)
+        try:
+            with open(filename, newline='',
+                      encoding='cp1251') as csvfile:
+                reader = csv.DictReader(csvfile)
+                try:
+                    for row in reader:
+                        name = str(row['name'])
+                        price = float(row['price'])
+                        quantity = int(row['quantity'])
+                except KeyError:
+                    raise InstantiateCSVError
+                    cls(name, price, quantity)
+
+        except FileNotFoundError:
+            print('FileNotFoundError: _Отсутствует файл item.csv_')
+        except InstantiateCSVError as m:
+            print(f"InstantiateCSVError: {m.message}")
 
     @property
     def name(self):
