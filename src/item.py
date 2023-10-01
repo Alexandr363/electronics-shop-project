@@ -61,6 +61,7 @@ class Item:
                         quantity = int(row['quantity'])
                 except KeyError:
                     raise InstantiateCSVError
+                else:
                     cls(name, price, quantity)
 
         except FileNotFoundError:
